@@ -23,7 +23,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/iemafzalhassan/edgeops-platform.git
+    repoURL: https://github.com/iemafzalhassan/edgeops-labs-platform.git
     targetRevision: <branch>
     path: applications/<app-name>/k8s/overlays/<env>
   destination:

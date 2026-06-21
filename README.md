@@ -59,7 +59,7 @@ Observability Stack (Prometheus/Grafana/Loki/Tempo)
 ## 📁 Repository Structure
 
 ```
-edgeops-platform/
+edgeops-labs-platform/
 │
 ├── terraform-platform/     # Infrastructure as Code (OpenTofu)
 │   ├── modules/            # Reusable infrastructure modules
@@ -129,8 +129,8 @@ edgeops-platform/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/iemafzalhassan/edgeops-platform.git
-cd edgeops-platform
+git clone https://github.com/iemafzalhassan/edgeops-labs-platform.git
+cd edgeops-labs-platform
 
 # 2. Install prerequisites
 make setup

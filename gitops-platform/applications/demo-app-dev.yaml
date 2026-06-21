@@ -13,7 +13,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/iemafzalhassan/edgeops-platform.git
+    repoURL: https://github.com/iemafzalhassan/edgeops-labs-platform.git
     targetRevision: develop
     path: applications/demo-app/k8s/overlays/dev
 

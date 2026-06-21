@@ -8,8 +8,8 @@ See [Prerequisites](prerequisites.md) for required tools.
 
 ```bash
 # Clone the repository
-git clone https://github.com/iemafzalhassan/edgeops-platform.git
-cd edgeops-platform
+git clone https://github.com/iemafzalhassan/edgeops-labs-platform.git
+cd edgeops-labs-platform
 
 # Verify tools are installed
 make check-tools

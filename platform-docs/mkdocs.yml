@@ -11,8 +11,8 @@ site_url: https://labs.iemafzalhassan.tech
 site_description: Production-inspired cloud-native platform engineering documentation
 site_author: Afzal Hassan
 
-repo_name: iemafzalhassan/edgeops-platform
-repo_url: https://github.com/iemafzalhassan/edgeops-platform
+repo_name: iemafzalhassan/edgeops-labs-platform
+repo_url: https://github.com/iemafzalhassan/edgeops-labs-platform
 
 theme:
   name: material

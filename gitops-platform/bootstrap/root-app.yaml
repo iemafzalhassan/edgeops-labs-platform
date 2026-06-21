@@ -8,7 +8,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: edgeops-platform
+  name: edgeops-labs-platform
   namespace: argocd
   labels:
     app.kubernetes.io/managed-by: argocd
@@ -19,7 +19,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/iemafzalhassan/edgeops-platform.git
+    repoURL: https://github.com/iemafzalhassan/edgeops-labs-platform.git
     targetRevision: HEAD
     path: gitops-platform/applications
 
