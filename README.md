@@ -1,4 +1,3 @@
-<![CDATA[<div align="center">
 
 # 🚀 EdgeOps Labs Platform
 
@@ -13,7 +12,6 @@
 
 [Architecture](#architecture) · [Getting Started](#getting-started) · [Documentation](platform-docs/) · [Contributing](CONTRIBUTING.md)
 
-</div>
 
 ---
 
@@ -200,4 +198,4 @@ Built with ❤️ by [Afzal Hassan](https://github.com/iemafzalhassan)
 **EdgeOps Labs** · [edgeopslabs.io](https://edgeopslabs.io) · [labs.iemafzalhassan.tech](https://labs.iemafzalhassan.tech)
 
 </div>
-]]>
+</div>
