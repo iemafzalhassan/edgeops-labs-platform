@@ -14,19 +14,21 @@ cd edgeops-labs-platform
 # Verify tools are installed
 make check-tools
 
-# Create the cluster
-make cluster-create
+# Create the AKS cluster via OpenTofu
+make cluster-create ENV=azure-dev
+
+# Connect to the cluster
+az aks get-credentials --resource-group edgeops-labs-rg --name edgeops-dev-aks --overwrite-existing
 
 # Verify everything is running
-make cluster-status
-
-# Open k9s dashboard
-make cluster-dashboard
+kubectl get nodes
 ```
 
 ## What Gets Created
 
-1. **Kind Cluster** — 3 nodes (1 control-plane + 2 workers)
+Depending on your `ENV`, the following infrastructure is provisioned:
+
+1. **Infrastructure**: Kind cluster locally, or AKS + VNet + ACR on Azure.
 2. **Namespaces** — dev, staging, prod, argocd, monitoring, observability, ingress
 3. **Resource Quotas** — Per-environment CPU/memory limits
 4. **Limit Ranges** — Default container resource constraints

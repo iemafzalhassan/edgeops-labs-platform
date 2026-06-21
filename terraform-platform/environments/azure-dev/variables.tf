@@ -5,13 +5,13 @@
 variable "cluster_name" {
   description = "Name of the AKS cluster"
   type        = string
-  default     = "edgeops-aks-dev"
+  default     = "edgeops-dev-aks"
 }
 
 variable "location" {
-  description = "Azure region"
+  description = "Azure region for the environment"
   type        = string
-  default     = "eastus"
+  default     = "southeastasia"
 }
 
 variable "resource_group_name" {
@@ -23,7 +23,7 @@ variable "resource_group_name" {
 variable "kubernetes_version" {
   description = "Kubernetes version for AKS"
   type        = string
-  default     = "1.30"
+  default     = "1.33"
 }
 
 variable "environments" {
@@ -45,11 +45,11 @@ variable "enable_monitoring" {
 }
 
 variable "common_labels" {
-  description = "Common labels applied to all resources"
+  description = "Common labels applied to all resources (also used as Azure tags)"
   type        = map(string)
   default = {
-    "app.kubernetes.io/managed-by" = "opentofu"
-    "platform.edgeops.io/project"  = "edgeops-labs"
-    "platform.edgeops.io/env"      = "dev"
+    "ManagedBy"   = "opentofu"
+    "Environment" = "dev"
+    "Project"     = "edgeops-labs"
   }
 }

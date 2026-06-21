@@ -4,6 +4,7 @@
 
 provider "azurerm" {
   features {}
+  resource_provider_registrations = "core"
 }
 
 # Kubernetes provider — configured after cluster creation

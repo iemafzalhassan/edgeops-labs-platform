@@ -2,13 +2,13 @@
 
 ## Purpose
 
-Create a new EdgeOps Labs Kind cluster with multi-node configuration, ingress support, and environment namespaces.
+Create a new EdgeOps Labs cluster (either local Kind or cloud-based AKS) with environment namespaces and proper resource management.
 
 ## Prerequisites
 
-- [ ] Docker Desktop running with ≥6 GB RAM allocated
+- [ ] Docker Desktop running with ≥6 GB RAM allocated (for local)
+- [ ] Azure CLI authenticated (`az login`) (for azure-dev)
 - [ ] Tools installed: `kind`, `tofu`, `kubectl`, `helm`
-- [ ] No existing Kind cluster named `edgeops-labs`
 
 ## Procedure
 
@@ -21,17 +21,22 @@ make check-tools
 ### Step 2: Initialize OpenTofu
 
 ```bash
-make tf-init
+make tf-init ENV=local
+# OR
+make tf-init ENV=azure-dev
 ```
 
 ### Step 3: Review Plan
 
 ```bash
-make tf-plan
+make tf-plan ENV=local
+# OR
+make tf-plan ENV=azure-dev
 ```
 
 Expected output:
-- 1 Kind cluster (3 nodes: 1 control-plane + 2 workers)
+- **Local**: 1 Kind cluster (3 nodes)
+- **Azure**: 1 AKS cluster, VNet, Managed Identity, ACR
 - 7 Kubernetes namespaces (dev, staging, prod, argocd, monitoring, observability, ingress)
 - 3 Resource quotas (one per environment)
 - 3 Limit ranges (one per environment)

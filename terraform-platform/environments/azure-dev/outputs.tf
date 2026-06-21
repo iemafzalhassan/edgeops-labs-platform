@@ -10,6 +10,7 @@ output "cluster_name" {
 output "cluster_endpoint" {
   description = "Kubernetes API server endpoint"
   value       = module.cluster.cluster_endpoint
+  sensitive   = true
 }
 
 output "registry_login_server" {

@@ -68,6 +68,17 @@ graph TD
 5. **Observability by Default**: Every component is instrumented
 6. **Progressive Delivery**: Changes flow through dev → staging → prod
 
+## Platform Portability Roadmap
+
+This platform is intentionally designed to demonstrate cloud-agnostic architecture. The infrastructure layer is cleanly decoupled from the Kubernetes workload layer, allowing the platform to migrate seamlessly across providers.
+
+**The Multi-Cloud Journey:**
+1. **Phase 1 (Complete)**: Local validation via `Kind`
+2. **Phase 2 (Complete)**: Cloud deployment via `Azure AKS`
+3. **Phase 3 (Future)**: Provider abstraction expansion to `AWS EKS`
+
+*This explicitly demonstrates Platform Engineering maturity by enabling workloads to port seamlessly from local dev to Azure and eventually AWS, governed purely by GitOps and OpenTofu provider abstractions.*
+
 ## Component Responsibilities
 
 | Component | Manages | Does NOT Manage |
