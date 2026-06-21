@@ -20,9 +20,11 @@ graph TD
         GHA --> BUILD[Build Images]
     end
 
-    subgraph "Infrastructure Layer"
+    subgraph "Layer 1: Infrastructure (SWAPPABLE)"
         GHA --> TF[OpenTofu]
-        TF --> KIND[Kind Cluster]
+        TF --> KIND[Local: Kind Cluster]
+        TF --> AZURE[Azure: AKS Cluster]
+        TF --> AWS[AWS: EKS Cluster]
     end
 
     subgraph "Kubernetes Cluster"

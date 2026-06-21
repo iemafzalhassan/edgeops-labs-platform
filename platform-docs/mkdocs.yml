@@ -59,6 +59,8 @@ nav:
   - Home: index.md
   - Architecture:
     - System Overview: architecture/system-overview.md
+    - Multi-Cloud Design: architecture/multi-cloud.md
+    - AI Infrastructure: architecture/ai-infrastructure.md
     - Networking Design: architecture/networking.md
     - Security Design: architecture/security.md
     - GitOps Design: architecture/gitops.md

@@ -8,7 +8,7 @@
 # Module: Kind Cluster (Network + Kubernetes combined)
 # -----------------------------------------------------------
 module "cluster" {
-  source = "./modules/kubernetes"
+  source = "../../modules/kubernetes/kind"
 
   cluster_name       = var.cluster_name
   kubernetes_version = var.kubernetes_version
@@ -19,7 +19,7 @@ module "cluster" {
 # Module: Namespaces (Environment + Platform)
 # -----------------------------------------------------------
 module "namespaces" {
-  source = "./modules/namespaces"
+  source = "../../modules/namespaces"
 
   environments        = var.environments
   platform_namespaces = var.platform_namespaces
@@ -33,7 +33,7 @@ module "namespaces" {
 # -----------------------------------------------------------
 # Uncomment in Week 4
 # module "security" {
-#   source = "./modules/security"
+#   source = "../../modules/security"
 #
 #   environments  = var.environments
 #   common_labels = var.common_labels
@@ -46,7 +46,7 @@ module "namespaces" {
 # -----------------------------------------------------------
 # Uncomment in Week 4
 # module "monitoring" {
-#   source = "./modules/monitoring"
+#   source = "../../modules/monitoring"
 #
 #   enable_monitoring = var.enable_monitoring
 #   common_labels     = var.common_labels

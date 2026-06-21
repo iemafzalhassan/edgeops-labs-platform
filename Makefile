@@ -19,9 +19,10 @@ CYAN   := \033[0;36m
 NC     := \033[0m # No Color
 
 # Variables
+ENV             ?= local
 CLUSTER_NAME    ?= edgeops-labs
 KUBECONFIG_PATH ?= $(HOME)/.kube/edgeops-labs.kubeconfig
-TF_DIR          := terraform-platform
+TF_DIR          := terraform-platform/environments/$(ENV)
 DOCS_DIR        := platform-docs
 
 # ============================================================
@@ -58,6 +59,14 @@ check-tools: ## Verify all required tools are installed
 	@command -v k9s >/dev/null 2>&1 && echo "$(GREEN)✓$(NC) k9s" || echo "$(RED)✗$(NC) k9s"
 	@command -v trivy >/dev/null 2>&1 && echo "$(GREEN)✓$(NC) Trivy" || echo "$(RED)✗$(NC) Trivy"
 	@command -v kyverno >/dev/null 2>&1 && echo "$(GREEN)✓$(NC) Kyverno CLI" || echo "$(RED)✗$(NC) Kyverno CLI"
+
+# ============================================================
+# Environment Operations
+# ============================================================
+
+env-list: ## List available environments
+	@echo "$(CYAN)Available Environments:$(NC)"
+	@ls -1 terraform-platform/environments
 
 # ============================================================
 # Cluster Operations
