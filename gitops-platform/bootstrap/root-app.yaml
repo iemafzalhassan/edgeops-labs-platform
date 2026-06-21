@@ -1,0 +1,44 @@
+# ============================================================
+# GitOps Platform - ArgoCD App-of-Apps Bootstrap
+# ============================================================
+# This is the root ArgoCD Application that manages all other
+# applications. Deploy this single manifest to bootstrap the
+# entire GitOps pipeline.
+# ============================================================
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: edgeops-platform
+  namespace: argocd
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    platform.edgeops.io/project: edgeops-labs
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/iemafzalhassan/edgeops-platform.git
+    targetRevision: HEAD
+    path: gitops-platform/applications
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

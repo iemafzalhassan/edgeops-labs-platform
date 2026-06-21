@@ -1,0 +1,69 @@
+# EdgeOps Labs Platform - .gitignore
+
+# ===== Terraform / OpenTofu =====
+**/.terraform/
+**/.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+
+# ===== Kubernetes =====
+*.kubeconfig
+kubeconfig
+*.pem
+*.key
+*.crt
+*.csr
+
+# ===== Helm =====
+**/charts/*.tgz
+**/*.lock
+
+# ===== Docker =====
+.docker/
+
+# ===== IDE =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ===== Environment =====
+.env
+.env.*
+!.env.example
+*.env
+
+# ===== Build =====
+dist/
+build/
+node_modules/
+__pycache__/
+*.pyc
+
+# ===== MkDocs =====
+site/
+
+# ===== Secrets =====
+secrets/
+*.secret
+*.sealed
+
+# ===== Logs =====
+*.log
+logs/
+
+# ===== OS =====
+Thumbs.db
+.DS_Store

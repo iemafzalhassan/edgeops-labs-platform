@@ -1,0 +1,114 @@
+# ============================================================
+# EdgeOps Labs Platform - Documentation Portal
+# ============================================================
+# MkDocs Material Theme Configuration
+# Serve locally: mkdocs serve
+# Build: mkdocs build --strict
+# ============================================================
+
+site_name: EdgeOps Labs Platform
+site_url: https://labs.iemafzalhassan.tech
+site_description: Production-inspired cloud-native platform engineering documentation
+site_author: Afzal Hassan
+
+repo_name: iemafzalhassan/edgeops-platform
+repo_url: https://github.com/iemafzalhassan/edgeops-platform
+
+theme:
+  name: material
+  language: en
+
+  palette:
+    # Light mode
+    - scheme: default
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.copy
+
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Architecture:
+    - System Overview: architecture/system-overview.md
+    - Networking Design: architecture/networking.md
+    - Security Design: architecture/security.md
+    - GitOps Design: architecture/gitops.md
+  - Operations:
+    - SOPs:
+      - SOP-001 Cluster Creation: operations/sop-001-cluster-creation.md
+      - SOP-002 Namespace Creation: operations/sop-002-namespace-creation.md
+      - SOP-003 Application Deployment: operations/sop-003-app-deployment.md
+      - SOP-004 Disaster Recovery: operations/sop-004-disaster-recovery.md
+      - SOP-005 Incident Response: operations/sop-005-incident-response.md
+    - Runbooks: operations/runbooks.md
+  - Security:
+    - Policies: security/policies.md
+    - Kyverno Rules: security/kyverno.md
+  - Onboarding:
+    - Getting Started: onboarding/getting-started.md
+    - Prerequisites: onboarding/prerequisites.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.mark
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+  - tags
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/iemafzalhassan
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/iemafzalhassan
+
+copyright: Copyright &copy; 2026 Afzal Hassan — EdgeOps Labs

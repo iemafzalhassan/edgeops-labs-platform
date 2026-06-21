@@ -1,0 +1,29 @@
+# ============================================================
+# GitOps Platform - Demo Application (Dev)
+# ============================================================
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-app-dev
+  namespace: argocd
+  labels:
+    platform.edgeops.io/environment: dev
+    platform.edgeops.io/app: demo-app
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/iemafzalhassan/edgeops-platform.git
+    targetRevision: develop
+    path: applications/demo-app/k8s/overlays/dev
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=false

@@ -1,0 +1,135 @@
+# ============================================================
+# EdgeOps Labs Platform - CI Pipeline
+# ============================================================
+# Validates Terraform, scans for security issues, and lints
+# all configuration files on every push and PR.
+# ============================================================
+
+name: Platform CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  TOFU_VERSION: "1.12.3"
+
+jobs:
+  # -----------------------------------------------------------
+  # OpenTofu Validation
+  # -----------------------------------------------------------
+  terraform-validate:
+    name: "🏗️ OpenTofu Validate"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform-platform
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup OpenTofu
+        uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: ${{ env.TOFU_VERSION }}
+
+      - name: Format Check
+        run: tofu fmt -check -recursive
+
+      - name: Initialize
+        run: tofu init -backend=false
+
+      - name: Validate
+        run: tofu validate
+
+  # -----------------------------------------------------------
+  # Security Scanning
+  # -----------------------------------------------------------
+  security-scan:
+    name: "🛡️ Security Scan"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Trivy IaC Scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          scan-ref: .
+          severity: HIGH,CRITICAL
+          exit-code: 0  # Warning only initially, change to 1 to enforce
+
+      - name: Run Trivy YAML Scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          scan-ref: gitops-platform/
+          severity: HIGH,CRITICAL
+          exit-code: 0
+
+  # -----------------------------------------------------------
+  # Kubernetes Manifest Validation
+  # -----------------------------------------------------------
+  k8s-lint:
+    name: "☸️ K8s Manifest Lint"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate YAML syntax
+        run: |
+          find gitops-platform/ -name "*.yaml" -o -name "*.yml" | while read file; do
+            echo "Validating: $file"
+            python3 -c "import yaml; yaml.safe_load(open('$file'))" || exit 1
+          done
+
+  # -----------------------------------------------------------
+  # Documentation Build
+  # -----------------------------------------------------------
+  docs-build:
+    name: "📚 Docs Build"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install MkDocs
+        run: pip install mkdocs-material
+
+      - name: Build Documentation
+        run: cd platform-docs && mkdocs build --strict
+
+  # -----------------------------------------------------------
+  # Summary
+  # -----------------------------------------------------------
+  ci-summary:
+    name: "✅ CI Summary"
+    runs-on: ubuntu-latest
+    needs: [terraform-validate, security-scan, k8s-lint, docs-build]
+    if: always()
+
+    steps:
+      - name: Check Results
+        run: |
+          echo "=== CI Pipeline Results ==="
+          echo "OpenTofu: ${{ needs.terraform-validate.result }}"
+          echo "Security: ${{ needs.security-scan.result }}"
+          echo "K8s Lint: ${{ needs.k8s-lint.result }}"
+          echo "Docs:     ${{ needs.docs-build.result }}"
